@@ -6,6 +6,25 @@ type Post = {
 
 export const posts: Post[] = [
   {
+    slug: 'earning-back-trust-in-an-agent', category: 'AGENTS IN PRACTICE', minutes: 3,
+    title: 'Earning back trust in an agent.',
+    description: 'Building a campaign agent was straightforward. Helping people trust it took much more work.',
+    paragraphs: [
+      'When I built a campaign-building agent, the engineering was fairly straightforward. The integrations and pipeline were already there. Much of the work was guiding the agent to find the configuration definitions and use the existing system to build a campaign.',
+      'Getting people to use it was harder. The users were solution consultants who built campaigns around their clients\' goals. The agent was entering a workflow where its output could shape a customer conversation and affect a deal.',
+      'At first, the reaction was awe. People were impressed by how fast the agent worked and how much it could do. Then it made a mistake. The incorrect output reached a customer and affected a deal.',
+      'A human was supposed to review the output before it was presented to the customer. That expectation was already part of the process, but the error still got through. I don\'t see that as a reason to blame an individual. In a fast-moving startup, a review step can be missed. A workflow has to account for that possibility.',
+      'The reaction changed quickly. The consultants who had been excited were now afraid to keep using the agent. The speed was still there, but they had seen the consequences of an error reaching a customer. Asking them to try again meant asking them to take that risk again.',
+      'We responded by adding more human review gates throughout the building process and more checks on intermediate artifacts. That gave us additional opportunities to inspect the work before it became a finished campaign. We also ran an internal study to verify the agent\'s outputs and compare them with human outputs.',
+      'After that work, the agent was brought back online. Reintroducing it took changes to the process and a deliberate effort to examine its output. The initial demonstration of capability had been enough to create excitement. Recovering from a mistake required more evidence.',
+      'I recognize the same pattern in my own experience with Claude Code. At first I was amazed by what it could do. Then I watched it make mistakes and write bugs, so I tightened the leash. I became more cautious about what I delegated and how much of its work I accepted.',
+      'Over time, I put more robust verification around the work. As the checks improved, the output became more reliable and I became more comfortable trusting it. My confidence depended on having a way to find mistakes, rather than hoping the next result would be correct.',
+      'These experiences have made verification a central design question for me. Where in the workflow should a result be checked? What evidence does a reviewer need? What happens if someone misses a review? How do we know the checks are catching the errors that matter?',
+      'A review gate is only useful if it helps someone make a judgment and fits the way the team actually works. Adding more gates gave us more chances to catch problems, but the broader lesson was to design the verification with as much care as the generation.',
+      'Whether an agent produces reliable work depends heavily on that design. Model capability gets the work moving. Verification determines how confidently people can use the result, especially after they have already seen the system fail.'
+    ]
+  },
+  {
     slug: 'my-first-incident-triage-agent', category: 'ENGINEERING', minutes: 3,
     publishedMonth: '2025-04', publishedLabel: 'April 2025',
     title: 'My first incident triage agent.',
