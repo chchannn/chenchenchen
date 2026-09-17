@@ -3,12 +3,11 @@
 import { useRef, useState } from 'react';
 import { ArrowLeft, ArrowRight, Check, Clock3, Copy, Download, GitCompareArrows, Handshake, Hotel, Plus, RotateCcw, SearchCheck, UserRound } from 'lucide-react';
 import { emptyIncident, isComplete, makeBrief, room100, symptoms, toggleSymptom, type Incident } from '@/lib/discovery';
+import { trackEvent, worksheetAnswers, frequencies, consequences, accessOptions } from '@/lib/analytics';
+import WorksheetSubmit from './worksheet-submit';
 
 const icons = [Clock3, Copy, GitCompareArrows, UserRound, SearchCheck, Handshake, Plus];
 const steps = ['Spot the friction', 'Make it concrete', 'Choose a workflow'];
-const frequencies = ['Every day', 'Every week', 'Every month', 'Rarely', 'Not sure yet'];
-const consequences = ['Minor inconvenience', 'Work waits or a customer waits', 'Rework or extra cost', 'A missed promise or lost business', 'Safety or compliance concern', 'Not sure yet'];
-const accessOptions = ['People and artifacts are accessible', 'Some access; gaps to resolve', 'Access is blocked', 'Not sure yet'];
 
 export default function Discovery() {
   const [step, setStep] = useState(0);
@@ -26,6 +25,7 @@ export default function Discovery() {
   const chosenItem = drafts[chosen];
 
   function move(next: number) {
+    trackEvent('worksheet_step', { worksheet_step: next + 1 });
     setStep(next); setError(''); setConfirmReset(false);
     requestAnimationFrame(() => { heading.current?.focus(); heading.current?.scrollIntoView({ block: 'start', behavior: 'instant' }); });
   }
@@ -34,6 +34,7 @@ export default function Discovery() {
     setError('');
   }
   function chooseSymptom(nextId: string) {
+    trackEvent('worksheet_problem_select', { ...worksheetAnswers(nextId, {}, example), selected: !selected.includes(nextId) });
     setSelected(current => toggleSymptom(current, nextId));
     setActive(0); setChosen(''); setError('');
   }
@@ -47,11 +48,13 @@ export default function Discovery() {
   function nextIncident(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (!isComplete(item)) { setError('Add a workflow, a real incident, and the three comparison answers.'); return; }
+    trackEvent('worksheet_example_complete', worksheetAnswers(id, item, example));
     if (active < selected.length - 1) { setActive(active + 1); setError(''); heading.current?.focus(); }
     else move(2);
   }
   function download() {
     if (!chosenItem) return;
+    trackEvent('worksheet_download', worksheetAnswers(chosen, chosenItem, example));
     const content = makeBrief(symptoms.find(s => s.id === chosen)?.title || '', chosenItem, example);
     const url = URL.createObjectURL(new Blob([content], { type: 'text/markdown;charset=utf-8' }));
     const link = document.createElement('a'); link.href = url; link.download = 'workflow-to-investigate.md'; link.click();
@@ -59,7 +62,7 @@ export default function Discovery() {
   }
 
   return <main id="discovery-main" className="wrap discovery-main">
-    <div className="discovery-topline"><span className="small">AGENT USE-CASE FINDER <span className="prototype-tag">PROTOTYPE</span></span><span className="discovery-private">No sign-in. Answers stay in this tab.</span></div>
+    <div className="discovery-topline"><span className="small">AGENT USE-CASE FINDER <span className="prototype-tag">PROTOTYPE</span></span><span className="discovery-private">No sign-in. Share only when ready.</span></div>
     <nav className="discovery-steps" aria-label="Discovery progress">{steps.map((label, index) => <button key={label} disabled={index > step} aria-current={step === index ? 'step' : undefined} onClick={() => move(index)}><span>{index < step ? <Check size={14}/> : index + 1}</span>{label}</button>)}</nav>
     <div className="discovery-layout">
       <section className="discovery-work">
@@ -77,7 +80,7 @@ export default function Discovery() {
         {step === 1 && <>
           <p className="discovery-lead">{symptom?.prompt}</p>
           <div className="incident-tabs" role="tablist" aria-label="Your examples">{selected.map((key, index) => <button role="tab" aria-selected={active === index} key={key} onClick={() => { setActive(index); setError(''); }}>{drafts[key] && isComplete(drafts[key]) ? <Check size={14}/> : <span>{index + 1}.</span>}{symptoms.find(s => s.id === key)?.title}</button>)}</div>
-          <form onSubmit={nextIncident} className="incident-form" key={id}>
+          <form id="worksheet-example" onSubmit={nextIncident} className="incident-form" key={id}>
             <label>What was someone trying to get done?<input required maxLength={120} value={item.workflow} onChange={e => update('workflow', e.target.value)} placeholder="e.g. Get a vacant room ready for the next guest"/></label>
             <label>What happened?<textarea required maxLength={2000} rows={4} value={item.incident} onChange={e => update('incident', e.target.value)} placeholder="Describe one incident, including where the work stopped."/></label>
             <div className="incident-pair"><label>Who was involved? <small>Optional</small><input maxLength={500} value={item.people} onChange={e => update('people', e.target.value)} placeholder="People or teams"/></label><label>What information did they need? <small>Optional</small><input maxLength={500} value={item.artifacts} onChange={e => update('artifacts', e.target.value)} placeholder="Emails, tools, tickets, checklists..."/></label></div>
@@ -91,13 +94,14 @@ export default function Discovery() {
           <fieldset className="candidate-list"><legend className="sr-only">Choose a workflow to investigate</legend>{selected.map((key, index) => {
             const candidate = drafts[key] || emptyIncident(); const complete = isComplete(candidate);
             return <div key={key} className={`candidate ${chosen === key ? 'is-selected' : ''}`}>
-              <label className="candidate-choice"><input type="radio" name="workflow" checked={chosen === key} disabled={!complete} onChange={() => setChosen(key)}/><span><small>{symptoms.find(s => s.id === key)?.title}</small><strong>{candidate.workflow || 'Unfinished example'}</strong></span></label>
+              <label className="candidate-choice"><input type="radio" name="workflow" checked={chosen === key} disabled={!complete} onChange={() => { setChosen(key); trackEvent('worksheet_candidate_select', worksheetAnswers(key, candidate, example)); }}/><span><small>{symptoms.find(s => s.id === key)?.title}</small><strong>{candidate.workflow || 'Unfinished example'}</strong></span></label>
               <p>{candidate.incident || 'Describe an incident before choosing this workflow.'}</p>
               <dl><div><dt>Frequency</dt><dd>{candidate.frequency || 'Missing'}</dd></div><div><dt>Consequence</dt><dd>{candidate.consequence || 'Missing'}</dd></div><div><dt>Access</dt><dd>{candidate.access || 'Missing'}</dd></div></dl>
               <button className="discovery-text-button" onClick={() => { setActive(index); move(1); }}>Edit example <ArrowRight size={14}/></button>
             </div>;
           })}</fieldset>
           {chosenItem && <section className="investigation-result" aria-live="polite"><span className="small">YOUR NEXT INVESTIGATION</span><h2>{chosenItem.workflow}</h2><p>Follow this work from its trigger to its completed outcome. Gather real artifacts and ask where truth, time, or judgment is lost.</p><ul><li>Where do sources disagree?</li><li>How long until the next useful action?</li><li>What does an experienced person know that is not written down?</li></ul><p className="result-caution">This is a candidate to investigate, not an agent recommendation. A process change, ordinary automation, or no intervention may be the better fit.</p><button className="discovery-primary" onClick={download}><Download size={17}/> Download your notes</button></section>}
+          {chosenItem && selected.every(key => isComplete(drafts[key] || emptyIncident())) && <WorksheetSubmit key={JSON.stringify({ chosen, drafts, example })} chosen={chosen} example={example} incidents={selected.map(symptom => ({ symptom, ...drafts[symptom] }))}/>}
           <div className="discovery-actions"><button className="discovery-secondary" onClick={() => move(1)}><ArrowLeft size={17}/> Back to examples</button>{!chosen && <span>Choose one workflow above.</span>}</div>
         </>}
       </section>
@@ -112,7 +116,7 @@ export default function Discovery() {
         <div className="discovery-boundary"><span className="small">THE QUESTION TO CARRY</span><p>Where is messy information stopping important work from moving forward?</p></div>
         {(selected.length > 0 || example) && <button className="discovery-text-button" onClick={() => setConfirmReset(true)}><RotateCcw size={15}/> Start fresh</button>}
         {confirmReset && <div className="reset-confirm" role="group" aria-label="Replace current answers"><p>Replace the answers in this tab?</p><button className="discovery-secondary" onClick={clear}>Start blank</button>{!example && <button className="discovery-secondary" onClick={loadExample}>Use Room 100</button>}<button className="discovery-text-button" onClick={() => setConfirmReset(false)}>Keep my answers</button></div>}
-        <p className="discovery-storage">Answers are not uploaded or saved. Download your notes before closing or refreshing.</p>
+        <p className="discovery-storage">Google Analytics measures your selected options and tool interactions. Written answers stay in this tab until you submit them to Chen. Download your notes before closing or refreshing.</p>
       </aside>
     </div>
   </main>;

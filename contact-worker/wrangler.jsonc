@@ -3,6 +3,11 @@
   "main": "index.mjs",
   "compatibility_date": "2026-09-17",
   "workers_dev": true,
+  "d1_databases": [{
+    "binding": "WORKSHEETS",
+    "database_name": "chenchenchen-worksheets",
+    "database_id": "b3299c90-73b0-442f-82cf-9c3acce68dc9"
+  }],
   "vars": {
     "ALLOWED_ORIGINS": "https://chenchenchen.me,http://chenchenchen.me",
     "EMAIL_FROM": "Chen Website <inquiries@chenchenchen.me>"

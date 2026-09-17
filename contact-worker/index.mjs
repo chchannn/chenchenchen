@@ -1,8 +1,11 @@
+import { saveWorksheet } from './worksheet.mjs';
+
 const MAX_BYTES = 16000;
 const RECIPIENT = 'leave117@gmail.com';
 
 export default {
   async fetch(request, env) {
+    if (new URL(request.url).pathname === '/worksheet') return saveWorksheet(request, env);
     const origin = request.headers.get('Origin');
     const allowed = (env.ALLOWED_ORIGINS || '').split(',').includes(origin);
     const headers = { 'Content-Type': 'application/json', 'Cache-Control': 'no-store', Vary: 'Origin' };
