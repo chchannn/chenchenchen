@@ -7,7 +7,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 
 export default function ContactForm() {
-  const endpoint = process.env.NEXT_PUBLIC_CONTACT_ENDPOINT;
+  const endpoint = process.env.NEXT_PUBLIC_CONTACT_ENDPOINT ?? 'https://chenchenchen-contact.chen-field-notes.workers.dev/contact';
   const [state, setState] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
   const [message, setMessage] = useState('');
   async function submit(event: FormEvent<HTMLFormElement>) {

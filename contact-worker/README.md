@@ -3,6 +3,19 @@
 No database. The Worker validates and rate-limits JSON submissions, then sends
 plain-text email to the fixed recipient leave117@gmail.com via Resend.
 
+## Deployment
+
+- Worker: `chenchenchen-contact`
+- Endpoint: `https://chenchenchen-contact.chen-field-notes.workers.dev/contact`
+- Sender: `Chen Website <inquiries@chenchenchen.me>`
+- Secret: `RESEND_API_KEY`, stored in Cloudflare, never in this repository.
+- DNS at Squarespace: Resend DKIM TXT at `resend._domainkey`, and CNAMEs
+  `rsend` -> `rsend.forge.rmta.net`, `send` -> `send.forge.rmta.net`.
+- Receiving is disabled. Existing website and email-security records are preserved.
+
+Do not enable the frontend until sender verification and HTTPS endpoint checks
+pass. Confirm delivery with a live form submission before declaring it active.
+
 ## Setup
 
 1. Sign in with `npx wrangler login`.
@@ -10,8 +23,9 @@ plain-text email to the fixed recipient leave117@gmail.com via Resend.
 3. Store a sending-only Resend key with
    `npx wrangler secret put RESEND_API_KEY --config contact-worker/wrangler.jsonc`.
 4. Deploy with `npx wrangler deploy --config contact-worker/wrangler.jsonc`.
-5. Set `NEXT_PUBLIC_CONTACT_ENDPOINT` to the returned HTTPS Worker URL plus
-   `/contact` when running `npm run build:pages`, then publish `dist/client`.
+5. The frontend defaults to the endpoint above. To use another Worker, set
+   `NEXT_PUBLIC_CONTACT_ENDPOINT` when running `npm run build:pages`, then
+   publish `dist/client`. An empty value disables submission.
 
 Never put the Resend key in public environment variables or source control.
 The unconfigured form offers direct email and does not pretend it can send.
