@@ -21,6 +21,7 @@ export const posts: Post[] = [
       'Over time, I put more robust verification around the work. As the checks improved, the output became more reliable and I became more comfortable trusting it. My confidence depended on having a way to find mistakes, rather than hoping the next result would be correct.',
       'These experiences have made verification a central design question for me. Where in the workflow should a result be checked? What evidence does a reviewer need? What happens if someone misses a review? How do we know the checks are catching the errors that matter?',
       'A review gate is only useful if it helps someone make a judgment and fits the way the team actually works. Adding more gates gave us more chances to catch problems, but the broader lesson was to design the verification with as much care as the generation.',
+      'Throughout that process, humans remain accountable for the agent\'s output. Delegating the work does not delegate responsibility for what we use, ship, or present to a customer. That responsibility includes checking the result and designing a process that makes meaningful checks possible. Avoiding individual blame after an incident still leaves us responsible for fixing the workflow that allowed the mistake through.',
       'Whether an agent produces reliable work depends heavily on that design. Model capability gets the work moving. Verification determines how confidently people can use the result, especially after they have already seen the system fail.'
     ]
   },
