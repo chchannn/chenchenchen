@@ -3,6 +3,10 @@ import { notFound } from 'next/navigation';
 import { ArrowLeft, ArrowUpRight, Asterisk } from 'lucide-react';
 import { posts } from '../../posts';
 
+export function generateStaticParams() {
+  return posts.map(({ slug }) => ({ slug }));
+}
+
 export async function generateMetadata({params}:{params:Promise<{slug:string}>}) {
   const {slug}=await params; const post=posts.find(p=>p.slug===slug);
   return {title:post ? `${post.title} | Chen` : 'Not found | Chen',description:post?.description};
