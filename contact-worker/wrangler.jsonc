@@ -1,0 +1,15 @@
+{
+  "name": "chenchenchen-contact",
+  "main": "index.mjs",
+  "compatibility_date": "2026-09-17",
+  "workers_dev": true,
+  "vars": {
+    "ALLOWED_ORIGINS": "https://chenchenchen.me,http://chenchenchen.me",
+    "EMAIL_FROM": "Chen Website <inquiries@chenchenchen.me>"
+  },
+  "ratelimits": [{
+    "name": "CONTACT_LIMITER",
+    "namespace_id": "2026091701",
+    "simple": { "limit": 5, "period": 60 }
+  }]
+}

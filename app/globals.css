@@ -10,6 +10,11 @@
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
 .contact-bottom .contact-pending{font-size:12px;margin-top:10px}
 /* Portrait-led introduction; the original photo supplies the accent palette. */
+.inquiry{display:grid;grid-template-columns:1fr 1.35fr;gap:90px;padding-block:65px 100px;min-height:calc(100vh - 165px)}
+.inquiry-intro h1{font-size:64px;line-height:1.1;font-weight:450;margin:26px 0}.inquiry-intro h1 span{color:#bc4823}.inquiry-intro p{font-size:18px;line-height:1.7;color:#69705f;max-width:350px}.email-link{display:inline-block;margin-top:22px;border-bottom:1px solid #a5aa9f;padding-bottom:5px;font-size:16px}
+.inquiry-form{padding-top:4px}.form-pair{display:grid;grid-template-columns:1fr 1fr;gap:20px}.form-field{margin-bottom:25px}.form-field label{display:block;font-size:14px;margin-bottom:10px}.form-field label span{color:#767b70}.form-field input,.form-field textarea{width:100%;background:#fff;border:1px solid #cdd1c8;border-radius:4px;padding:13px 14px;font:inherit;font-size:16px;height:48px;outline:none}.form-field textarea{height:190px;min-height:150px;resize:vertical;line-height:1.6}.form-field input:focus,.form-field textarea:focus{border-color:#bc4823;box-shadow:0 0 0 2px #bc482320}.inquiry-submit{background:#bc4823;color:#fff;border:0;border-radius:4px;min-height:48px;padding:12px 22px;font-size:16px;gap:12px;cursor:pointer}.inquiry-submit:hover{background:#993b1d}.form-submit p{font-size:12px;color:#69705f;line-height:1.6;margin-top:14px}.form-honeypot{display:none}
+@media(max-width:900px){.inquiry{gap:40px;grid-template-columns:1fr 1.3fr}.inquiry-intro h1{font-size:48px}.form-pair{grid-template-columns:1fr;gap:0}}
+@media(max-width:600px){.inquiry{grid-template-columns:1fr;gap:38px;padding-block:30px 55px}.inquiry-intro h1{font-size:48px;margin:20px 0}.inquiry-intro p{font-size:16px}.email-link{margin-top:10px}}
 .hero-content{padding-top:26px;text-align:center}
 .portrait{display:block;width:176px;height:176px;object-fit:cover;border-radius:50%;margin:0 auto 24px}
 .eyebrow{justify-content:center}
