@@ -39,7 +39,7 @@ export default function ContactForm() {
     <div className="form-field"><label htmlFor="inquiry-company">Company <span>(optional)</span></label><Input id="inquiry-company" name="company" autoComplete="organization" maxLength={160}/></div>
     <div className="form-field"><label htmlFor="inquiry-message">What can I help with?</label><Textarea id="inquiry-message" name="message" required rows={7} maxLength={10000}/></div>
     <div className="form-submit"><Button className="inquiry-submit" type="submit" disabled={!endpoint || state === 'sending'}>{state === 'sending' ? 'Sending...' : 'Send inquiry'} <ArrowUpRight size={18}/></Button>
-      {!endpoint && <p>The form is being connected. Please email <a href="mailto:leave117@gmail.com">leave117@gmail.com</a> directly for now.</p>}
+      {!endpoint && <p>The form is temporarily unavailable. Please try again later.</p>}
       {message && <p role={state === 'error' ? 'alert' : 'status'}>{message}</p>}
     </div>
   </form>;
