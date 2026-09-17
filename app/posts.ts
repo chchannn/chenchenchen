@@ -7,6 +7,7 @@ type Post = {
 export const posts: Post[] = [
   {
     slug: 'earning-back-trust-in-an-agent', category: 'AGENTS IN PRACTICE', minutes: 3,
+    publishedMonth: '2026-03', publishedLabel: 'March 2026',
     title: 'Earning back trust in an agent.',
     description: 'Building a campaign agent was straightforward. Helping people trust it took much more work.',
     paragraphs: [
