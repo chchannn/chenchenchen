@@ -7,6 +7,15 @@
       "_framework-D_rUT4EX.js"
     ]
   },
+  "_createLucideIcon-BrNKFXBt.js": {
+    "file": "_next/static/chunks/createLucideIcon-BrNKFXBt.js",
+    "name": "createLucideIcon",
+    "imports": [
+      "_rolldown-runtime-C60lm6uB.js",
+      "_Icon-D0zGVybZ.js",
+      "_framework-D_rUT4EX.js"
+    ]
+  },
   "_framework-D_rUT4EX.js": {
     "file": "_next/static/chunks/framework-D_rUT4EX.js",
     "name": "framework",
@@ -18,19 +27,30 @@
     "file": "_next/static/chunks/rolldown-runtime-C60lm6uB.js",
     "name": "rolldown-runtime"
   },
+  "app/agent-use-cases/discovery.tsx": {
+    "file": "_next/static/chunks/discovery-Dc3wF9W-.js",
+    "name": "discovery",
+    "src": "app/agent-use-cases/discovery.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_rolldown-runtime-C60lm6uB.js",
+      "_createLucideIcon-BrNKFXBt.js",
+      "_framework-D_rUT4EX.js"
+    ]
+  },
   "app/contact/form.tsx": {
-    "file": "_next/static/chunks/form-Dj5OOC7J.js",
+    "file": "_next/static/chunks/form-Bfes6mY6.js",
     "name": "form",
     "src": "app/contact/form.tsx",
     "isDynamicEntry": true,
     "imports": [
       "_rolldown-runtime-C60lm6uB.js",
-      "_Icon-D0zGVybZ.js",
+      "_createLucideIcon-BrNKFXBt.js",
       "_framework-D_rUT4EX.js"
     ]
   },
   "node_modules/vinext/dist/shims/internal/app-route-prefetch-policy.js": {
-    "file": "_next/static/chunks/app-route-prefetch-policy-BSPaiNyE.js",
+    "file": "_next/static/chunks/app-route-prefetch-policy-xpsP7N28.js",
     "name": "app-route-prefetch-policy",
     "src": "node_modules/vinext/dist/shims/internal/app-route-prefetch-policy.js",
     "isDynamicEntry": true,
@@ -39,7 +59,7 @@
     ]
   },
   "node_modules/vinext/dist/shims/layout-segment-context.js": {
-    "file": "_next/static/chunks/layout-segment-context-DOAwuJK2.js",
+    "file": "_next/static/chunks/layout-segment-context-COP_Ke_Y.js",
     "name": "layout-segment-context",
     "src": "node_modules/vinext/dist/shims/layout-segment-context.js",
     "isDynamicEntry": true,
@@ -50,7 +70,7 @@
     ]
   },
   "node_modules/vinext/dist/shims/streamed-icons.js": {
-    "file": "_next/static/chunks/streamed-icons-BbokXyyW.js",
+    "file": "_next/static/chunks/streamed-icons-B7zI55ff.js",
     "name": "streamed-icons",
     "src": "node_modules/vinext/dist/shims/streamed-icons.js",
     "isDynamicEntry": true,
@@ -60,7 +80,7 @@
     ]
   },
   "virtual:vinext-app-browser-entry": {
-    "file": "_next/static/chunks/index-Ullap7NQ.js",
+    "file": "_next/static/chunks/index-nwXPxSn6.js",
     "name": "index",
     "src": "virtual:vinext-app-browser-entry",
     "isEntry": true,
@@ -74,6 +94,7 @@
       "node_modules/vinext/dist/shims/layout-segment-context.js",
       "app/contact/form.tsx",
       "_Icon-D0zGVybZ.js",
+      "app/agent-use-cases/discovery.tsx",
       "node_modules/vinext/dist/shims/streamed-icons.js"
     ]
   }
