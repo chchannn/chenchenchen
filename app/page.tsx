@@ -19,6 +19,11 @@ export default function Home() {
           <div className="hero-bottom"><span>Ideas from the workbench.</span><span>Agents. Evals. How we work.</span></div>
         </div>
       </section>
+      <section className="wrap section">
+        <div className="section-heading"><h2>Find your starting point</h2><span className="small">INTERACTIVE TOOL</span></div>
+        <p className="section-intro">Where is important work getting stuck? Find one workflow worth investigating.</p>
+        <a className="text-link" href="/agent-use-cases">Explore agent use cases <ArrowUpRight size={18}/></a>
+      </section>
       <section id="writing" className="wrap writing section">
         <div className="section-heading"><h2>Field notes</h2><span className="small">01 / WRITING</span></div>
         <p className="section-intro">Questions I keep coming back to while building.</p>
