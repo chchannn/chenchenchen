@@ -11,11 +11,11 @@ export default function Home() {
     </header>
     <main id="main">
       <section className="hero">
-        <div className="hero-art" aria-hidden="true" />
         <div className="wrap hero-content">
-          <div className="eyebrow"><span className="status-dot"/> APPLIED AI / INDEPENDENT THINKING</div>
+          <img className="portrait" src="/chen-portrait.png" alt="Chen smiling in an orange knit hat" width="1792" height="1804" fetchPriority="high" />
+          <div className="eyebrow"><span className="status-dot"/> APPLIED AI</div>
           <h1>Hi, I'm Chen<span>.</span></h1>
-          <p className="hero-intro">I build AI systems.<br/>And write about the work<br/>of making them useful.</p>
+          <p className="hero-intro">I build AI systems and write about the work of making them useful.</p>
           <a className="text-link" href="#writing">Read my field notes <ArrowDown size={18}/></a>
           <div className="hero-bottom"><span>Ideas from the workbench.</span><span>Agents. Evals. How we work.</span></div>
         </div>
