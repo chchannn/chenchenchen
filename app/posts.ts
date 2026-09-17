@@ -1,5 +1,28 @@
-// Draft editorial copy for Chen's review; no private project details.
-export const posts = [
+type Post = {
+  slug: string; category: string; minutes: number; title: string;
+  description: string; paragraphs: string[]; publishedMonth?: string;
+  publishedLabel?: string;
+};
+
+export const posts: Post[] = [
+  {
+    slug: 'my-first-incident-triage-agent', category: 'ENGINEERING', minutes: 3,
+    publishedMonth: '2025-04', publishedLabel: 'April 2025',
+    title: 'My first incident triage agent.',
+    description: 'From hours to under 30 minutes, with one persistent question: what is the evidence?',
+    paragraphs: [
+      'In April 2025, I built an engineering incident triage agent using Claude 3 Sonnet. I used it to triage more than a dozen incidents. It was my first experience seeing how much an AI agent could do inside a real engineering investigation.',
+      'I watched it navigate large volumes of logs, connect data and artifacts to the logic in the code, and work toward the root cause of an incident. Following those connections was the part that caught my attention. A log entry describes something that happened; understanding why it happened means tracing that observation back through the system. The agent could help make that connection.',
+      'It could also be confidently wrong. During investigations, I saw it make up information, hallucinate details, and reach conclusions with only partial evidence. It could assemble a plausible explanation before it had enough support to call that explanation a root cause.',
+      'That creates a particular problem during an incident. An explanation that sounds convincing can send the investigation in the wrong direction. The agent could move quickly through the available material, but I still had to question whether its conclusion followed from what it had actually found.',
+      'The most useful change was to keep asking it for evidence. Whenever it made a claim, I asked it to show the support for that claim and verify it. I carried that requirement into the prompting: provide evidence, check the connection, and verify the conclusion. This became a repeated part of the investigation.',
+      'Asking for evidence made the reasoning easier to inspect. Instead of accepting a root-cause explanation because it sounded coherent, I could examine how the agent connected the logs, the artifacts, and the code. When the support was incomplete, there was a concrete reason to keep investigating.',
+      'With that prompting and review, we got a triage bot that was quite accurate in the incidents I worked through. Triage that had taken hours came down to less than 30 minutes. Those were the results I saw across this set of investigations, with me still involved in questioning and verifying the agent\'s claims.',
+      'That distinction matters when I think about the result. Faster triage meant reaching an understanding of the incident sooner. The agent was helping with the investigation; identifying the cause still left the engineering work of deciding how to respond.',
+      'The experience changed how I thought about model capability. I had watched an agent handle enough context to participate in a difficult investigation, and I had also watched it draw conclusions too early. Both were visible in the same workflow.',
+      'What stayed with me was how much better the investigation became when I insisted on support for each claim. I could see the capability in the way the agent navigated the system. I learned to trust a conclusion by checking the evidence it brought back.'
+    ]
+  },
   {
     slug: 'start-with-the-handoff', category: 'AGENT WORKFLOWS', minutes: 2,
     title: 'Start with the handoff.',

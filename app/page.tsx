@@ -25,7 +25,7 @@ export default function Home() {
         <p className="section-intro">Questions I keep coming back to while building.</p>
         <div className="post-list">{posts.map((post,index)=><Link className="post-row" href={`/writing/${post.slug}`} key={post.slug}>
           <span className="post-number">0{index+1}</span>
-          <div><div className="post-meta">{post.category} <span>/</span> {post.minutes} MIN READ</div><h3>{post.title}</h3><p>{post.description}</p></div>
+          <div><div className="post-meta">{post.category} <span>/</span> {post.minutes} MIN READ{post.publishedMonth && <> <span>/</span> <time dateTime={post.publishedMonth}>{post.publishedLabel}</time></>}</div><h3>{post.title}</h3><p>{post.description}</p></div>
           <ArrowUpRight className="post-arrow" size={26}/>
         </Link>)}</div>
       </section>
