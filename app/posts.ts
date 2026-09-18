@@ -69,18 +69,5 @@ export const posts: Post[] = [
       'Then separate the dimensions. An answer can be grounded and unhelpful. It can follow the requested format and still miss the point. Keeping these judgments visible makes it easier to identify what changed when a new prompt improves one dimension and damages another.',
       'An evaluation set should evolve as the team learns. Keep the difficult examples, record why the judgment changed, and include cases where the appropriate response is to ask a question or stop. The useful outcome is a clearer shared understanding of what the product should do.'
     ]
-  },
-  {
-    slug: 'memory-needs-an-edit-button', category: 'CONTEXT & MEMORY', minutes: 2,
-    title: 'Memory needs an edit button.',
-    description: 'Useful agent memory should be easy to inspect, correct, and retire.',
-    paragraphs: [
-      'An agent remembers that a team prefers short summaries. A month later, the team starts using those summaries for a different audience, one that needs more explanation. The old preference keeps shaping new outputs.',
-      'Remembering something creates an ongoing responsibility. The system needs a way to tell whether the information still applies, and people need a way to correct it without repeating themselves in every conversation.',
-      'A useful memory has more than a sentence of content. It has a source, a scope, and a reason to remain active. Was this an explicit decision, an observed pattern, or a suggestion? Does it apply to one project or to every future task?',
-      'Those distinctions should be visible to the person relying on the system. When an output reflects an old preference, the reader should be able to find that preference and change it. Otherwise debugging the answer becomes a guessing game.',
-      'There is also a difference between capture and commitment. A meeting note can preserve a tentative idea without turning it into a standing instruction. Promoting a note into durable guidance deserves a deliberate step, especially when other people will inherit the result.',
-      'I would judge a memory system partly by how easily it lets a team forget. Can an outdated decision be retired? Can two conflicting preferences be reconciled? Can a person understand why a piece of context influenced an answer? These are everyday product interactions that determine whether memory remains useful.'
-    ]
   }
 ];
